@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center">Employees</h1>
+    <ul class="list-group list-group-flush" id="employees">
+        <table class="table">
+            <thead class="thead-dark">
+                <th> Name </th>
+                <th> Job Position </th>
+                <th> Email </th>
+                <th> Starting Date </th>
+                <th> End date </th>
+                <th> Action </th>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for employee in user.employees %}
+                        <td> {{employee.name}} </td>
+                        <td> {{employee.job_position}} </td>
+                        <td> {{employee.email}} </td>
+                        <td> {{employee.starting_date}} </td>
+                        <td> {{employee.ending_date}} </td>
+                        <td>
+                            <button type="button" class="close" onClick="deleteNote({{ user.id }})">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </ul>
+    <form method="POST">
+        <input type="text" name="name" id="name" class="form-control" width="20%" placeholder="Name"> 
+        <select name="job_position" id="job_position" placeholder="Job Position" class="form-control">
+            <option value="IT Consultant"> IT Consultant </option>
+            <option value="Supervisior"> Supervisior </option>
+            <option value="Scrum Master"> Scrum Master </option>
+            <option value="Human Resource"> Human Resource </option>
+        </select>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+        <input type="date" name="starting_date" id="starting_date" class="form-control" placeholder="Starting Date">
+        <input type="date" name="ending_date" id="ending_date" class="form-control" placeholder="Ending Date">
+        <br />
+        <div align="right">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+    {% endblock %}
